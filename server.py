@@ -11,8 +11,8 @@ CORS(app)
 # TELEGRAM BOT
 # ==========================================
 
-BOT_TOKEN = os.environ.get("8988250341:AAH9wZhZtR-9Pj9Nrmna-WpSIFP_Adx498Y")
-CHAT_ID = os.environ.get("8885674120")
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
 
 
 # ==========================================
