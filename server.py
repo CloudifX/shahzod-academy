@@ -19,7 +19,7 @@ CHAT_ID = os.environ.get("CHAT_ID")
 # SHAHZOD ACADEMY
 # ==========================================
 
-ACADEMY_FOLDER = r"C:\Users\Shoxrux\Desktop\Shshzod Academy"
+ACADEMY_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
 @app.route("/")
