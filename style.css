@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+    padding: 30px 15px;
+}
+
+
+/* HEADER */
+
+header {
+    max-width: 850px;
+    margin: 0 auto 25px;
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 45px 25px;
+    border-radius: 20px;
+}
+
+header h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 17px;
+    opacity: 0.9;
+}
+
+
+/* ACADEMY INFO */
+
+section {
+    max-width: 850px;
+    margin: 0 auto 25px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+section h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+section p {
+    margin-bottom: 12px;
+    color: #4b5563;
+}
+
+
+/* FORM */
+
+main {
+    max-width: 850px;
+    margin: 0 auto 25px;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+main h2 {
+    font-size: 27px;
+    margin-bottom: 25px;
+}
+
+
+/* LABEL */
+
+form label {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+
+/* INPUT */
+
+input[type="text"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s;
+    background: white;
+}
+
+
+/* INPUT FOCUS */
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #111827;
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+
+/* TEXTAREA */
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+
+/* RADIO */
+
+input[type="radio"] {
+    margin-right: 7px;
+    transform: scale(1.1);
+}
+
+form input[type="radio"] + label {
+    font-weight: normal;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
+
+
+/* BUTTON */
+
+button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #111827;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #374151;
+    transform: translateY(-1px);
+}
+
+
+/* FOOTER */
+
+footer {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #111827;
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+footer h2 {
+    margin-bottom: 15px;
+}
+
+footer p {
+    margin-bottom: 8px;
+}
+
+footer a {
+    color: white;
+    font-weight: bold;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    header {
+        padding: 35px 20px;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    section,
+    main,
+    footer {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+
+    main h2 {
+        font-size: 23px;
+    }
+}

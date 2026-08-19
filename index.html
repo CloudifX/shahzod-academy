@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shahzod Academy | Ro'yxatdan o'tish</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>Shahzod Academy</h1>
+
+        <p>
+            Learn Grow Succeed!
+        </p>
+
+    </header>
+
+
+    <!-- ACADEMY INFO -->
+
+    <section>
+
+        <h2>Shahzod Academy haqida</h2>
+
+        <p>
+            Shahzod Academy — Chust tumani, Olmos shaharchasida
+            faoliyat yurituvchi zamonaviy o'quv markazi.
+        </p>
+
+        <p>
+            Markazimizning asosiy maqsadi — o'quvchilarga sifatli
+            ta'lim berish, ularning bilim va ko'nikmalarini rivojlantirish
+            hamda o'z oldiga qo'ygan maqsadlariga erishishiga yordam berish.
+        </p>
+
+        <p>
+            Shahzod Academy'da Ingliz tili, Rus tili, SAT va
+            Matematika yo'nalishlari bo'yicha ta'lim olish imkoniyati mavjud.
+            Har bir yo'nalishda o'quvchining bilim darajasi va maqsadiga
+            mos ravishda o'qish jarayonini tashkil etishga e'tibor qaratiladi.
+        </p>
+
+        <p>
+            Ayniqsa, Ingliz tili yo'nalishida o'quvchilarning mavjud
+            bilim darajasini aniqlash va shu darajaga mos ta'lim olishlari
+            uchun qulay sharoit yaratishga intilamiz.
+        </p>
+
+        <p>
+            Darslar uchun ertalabki va tushdan keyingi vaqtlar mavjud:
+            09:00–11:00, 13:30–15:30 va 15:30–17:30.
+            Bu o'quvchilarga o'z kun tartibiga mos guruhni tanlash
+            imkonini beradi.
+        </p>
+
+        <p>
+            Bizning maqsadimiz — shunchaki dars o'tish emas,
+            balki o'quvchilarda muntazam o'rganish, izlanish va
+            yuqori natijaga intilish ko'nikmalarini shakllantirish.
+        </p>
+
+        <p>
+            Siz ham o'zingizga mos yo'nalishni tanlang va
+            Shahzod Academy'da ta'lim olish uchun quyidagi
+            so'rovnomani to'ldiring.
+        </p>
+
+    </section>
+
+
+    <!-- FORM -->
+
+    <main>
+
+        <h2>Ro'yxatdan o'tish</h2>
+
+        <form id="academyForm">
+
+
+            <!-- NAME -->
+
+            <label for="fullname">
+                Ism va familiyangiz *
+            </label>
+
+            <br>
+
+            <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="Ism va familiyangizni kiriting"
+                required
+            >
+
+            <br><br>
+
+
+            <!-- PHONE -->
+
+            <label for="phone">
+                Telefon raqamingiz *
+            </label>
+
+            <br>
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+998 99 123 45 67"
+                required
+            >
+
+            <br><br>
+
+
+            <!-- AGE -->
+
+            <label for="age">
+                Yoshingiz yoki sinfingiz *
+            </label>
+
+            <br>
+
+            <input
+                type="text"
+                id="age"
+                name="age"
+                placeholder="Masalan: 16 yosh yoki 10-sinf"
+                required
+            >
+
+            <br><br>
+
+
+            <!-- COURSE -->
+
+            <label for="course">
+                Qaysi yo'nalishda tahsil olmoqchisiz? *
+            </label>
+
+            <br>
+
+            <select
+                id="course"
+                name="course"
+                required
+            >
+
+                <option value="">
+                    Yo'nalishni tanlang
+                </option>
+
+                <option value="Ingliz tili">
+                    Ingliz tili
+                </option>
+
+                <option value="Rus tili">
+                    Rus tili
+                </option>
+
+                <option value="SAT">
+                    SAT
+                </option>
+
+                <option value="Matematika">
+                    Matematika
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <!-- ENGLISH LEVEL -->
+
+            <div
+                id="englishLevelBox"
+                style="display: none;"
+            >
+
+                <label for="englishLevel">
+                    Ingliz tili bo'yicha darajangiz qanday?
+                </label>
+
+                <br>
+
+                <select
+                    id="englishLevel"
+                    name="englishLevel"
+                >
+
+                    <option value="">
+                        Darajangizni tanlang
+                    </option>
+
+                    <option value="Beginner">
+                        Beginner
+                    </option>
+
+                    <option value="Elementary">
+                        Elementary
+                    </option>
+
+                    <option value="Pre-Intermediate">
+                        Pre-Intermediate
+                    </option>
+
+                    <option value="Intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="Upper-Intermediate">
+                        Upper-Intermediate
+                    </option>
+
+                    <option value="Advanced">
+                        Advanced
+                    </option>
+
+                    <option value="Darajamni bilmayman">
+                        Darajamni bilmayman
+                    </option>
+
+                    <option value="Ingliz tilini hali o'rganmaganman">
+                        Ingliz tilini hali o'rganmaganman
+                    </option>
+
+                </select>
+
+                <br><br>
+
+            </div>
+
+
+            <!-- EXPERIENCE -->
+
+            <label for="experience">
+                Tanlagan faningiz bo'yicha oldin ham
+                o'qiganmisiz? Qancha vaqt va qayerda? *
+            </label>
+
+            <br>
+
+            <textarea
+                id="experience"
+                name="experience"
+                rows="5"
+                placeholder="Masalan: 1 yil maktabda o'qiganman..."
+                required
+            ></textarea>
+
+            <br><br>
+
+
+            <!-- TIME -->
+
+            <label>
+                Qaysi vaqtda o'qishni xohlaysiz? *
+            </label>
+
+            <br>
+
+            <input
+                type="radio"
+                id="time1"
+                name="time"
+                value="09:00 - 11:00"
+                required
+            >
+
+            <label for="time1">
+                09:00 - 11:00
+            </label>
+
+            <br>
+
+            <input
+                type="radio"
+                id="time2"
+                name="time"
+                value="13:30 - 15:30"
+            >
+
+            <label for="time2">
+                13:30 - 15:30
+            </label>
+
+            <br>
+
+            <input
+                type="radio"
+                id="time3"
+                name="time"
+                value="15:30 - 17:30"
+            >
+
+            <label for="time3">
+                15:30 - 17:30
+            </label>
+
+            <br><br>
+
+
+            <!-- MESSAGE -->
+
+            <label for="message">
+                Qo'shimcha ma'lumot yoki savolingiz
+            </label>
+
+            <br>
+
+            <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Qo'shimcha savolingiz bo'lsa yozing..."
+            ></textarea>
+
+            <br><br>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit">
+                Ariza yuborish
+            </button>
+
+        </form>
+
+    </main>
+
+
+    <!-- CONTACT -->
+
+    <footer>
+
+        <h2>Biz bilan bog'laning</h2>
+
+        <p>
+            📍 Chust tumani, Olmos shaharchasi, Sentr
+        </p>
+
+        <p>
+            📞 +998 99 486 33 13
+        </p>
+
+        <p>
+            📲 Telegram:
+            <a
+                href="https://t.me/Shahzodedu"
+                target="_blank"
+            >
+                @Shahzodedu
+            </a>
+        </p>
+
+        <p>
+            📸 Instagram:
+            <a
+                href="https://www.instagram.com/hsh.academy/"
+                target="_blank"
+            >
+                @hsh.academy
+            </a>
+        </p>
+
+        <p>
+            <strong>
+                Arizangiz qabul qilindi.
+                Tez orada administratorimiz siz bilan bog'lanadi.
+            </strong>
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
