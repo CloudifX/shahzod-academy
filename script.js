@@ -7,6 +7,7 @@ const form = document.getElementById("academyForm");
 const courseSelect = document.getElementById("course");
 const englishLevelBox = document.getElementById("englishLevelBox");
 const englishLevelSelect = document.getElementById("englishLevel");
+const successMessage = document.getElementById("successMessage");
 
 // ===============================
 // KURS TANLASH
@@ -75,28 +76,44 @@ form.addEventListener("submit", async function (event) {
     // ===============================
 
     if (!fullname) {
+
         alert("Iltimos, ism va familiyangizni kiriting.");
+
         document.getElementById("fullname").focus();
+
         return;
     }
+
 
     if (!phone) {
+
         alert("Iltimos, telefon raqamingizni kiriting.");
+
         document.getElementById("phone").focus();
+
         return;
     }
+
 
     if (!age) {
+
         alert("Iltimos, yoshingizni kiriting.");
+
         document.getElementById("age").focus();
+
         return;
     }
 
+
     if (!course) {
+
         alert("Iltimos, kursni tanlang.");
+
         document.getElementById("course").focus();
+
         return;
     }
+
 
     // ===============================
     // INGLIZ TILI LEVEL TEKSHIRISH
@@ -105,14 +122,18 @@ form.addEventListener("submit", async function (event) {
     if (course === "Ingliz tili" && !englishLevel) {
 
         englishLevelBox.style.display = "block";
+
         englishLevelSelect.required = true;
 
-        alert("Iltimos, ingliz tili darajangizni tanlang.");
+        alert(
+            "Iltimos, ingliz tili darajangizni tanlang."
+        );
 
         englishLevelSelect.focus();
 
         return;
     }
+
 
     // ===============================
     // VAQTNI TEKSHIRISH
@@ -120,7 +141,9 @@ form.addEventListener("submit", async function (event) {
 
     if (!time) {
 
-        alert("Iltimos, o'qish uchun qulay vaqtingizni tanlang.");
+        alert(
+            "Iltimos, o'qish uchun qulay vaqtingizni tanlang."
+        );
 
         return;
     }
@@ -160,13 +183,16 @@ form.addEventListener("submit", async function (event) {
 
 
     // Tugmani vaqtincha o'chirish
+
     const submitButton = form.querySelector(
         'button[type="submit"]'
     );
 
+
     if (submitButton) {
 
         submitButton.disabled = true;
+
         submitButton.textContent = "Yuborilmoqda...";
 
     }
@@ -189,6 +215,7 @@ form.addEventListener("submit", async function (event) {
 
 
         // Server javobini olish
+
         const result = await response.json();
 
 
@@ -198,28 +225,45 @@ form.addEventListener("submit", async function (event) {
 
         if (response.ok && result.success) {
 
-            alert(
-                "✅ Arizangiz qabul qilindi!\n\n" +
-                "Tez orada administratorimiz siz bilan bog'lanadi."
-            );
-
-
             // Formani tozalash
+
             form.reset();
 
 
             // English levelni yashirish
+
             englishLevelBox.style.display = "none";
 
             englishLevelSelect.required = false;
+
+
+            // FORMNI YASHIRISH
+
+            form.style.display = "none";
+
+
+            // SUCCESS MESSAGE'NI CHIQARISH
+
+            successMessage.style.display = "block";
+
+
+            // Muvaffaqiyatli yuborilgandan keyin
+            // sahifani success blokigacha olib kelish
+
+            successMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
 
 
         } else {
 
             alert(
                 "❌ Xatolik yuz berdi.\n\n" +
-                (result.message ||
-                "Iltimos, qaytadan urinib ko'ring.")
+                (
+                    result.message ||
+                    "Iltimos, qaytadan urinib ko'ring."
+                )
             );
 
         }
@@ -237,9 +281,11 @@ form.addEventListener("submit", async function (event) {
     } finally {
 
         // Tugmani qayta yoqish
+
         if (submitButton) {
 
             submitButton.disabled = false;
+
             submitButton.textContent = "Ariza yuborish";
 
         }
