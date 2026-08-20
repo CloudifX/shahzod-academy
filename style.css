@@ -156,6 +156,62 @@ button:hover {
 }
 
 
+/* SUCCESS MESSAGE */
+
+.success-message {
+    display: none;
+    margin-top: 25px;
+    padding: 35px 25px;
+    background: #111827;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    animation: successAppear 0.4s ease;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: white;
+    color: #111827;
+    font-size: 36px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-message h2 {
+    margin-bottom: 12px;
+    font-size: 27px;
+    color: white;
+}
+
+.success-message p {
+    margin: 8px 0;
+    color: #e5e7eb;
+    font-size: 15px;
+}
+
+
+/* SUCCESS ANIMATION */
+
+@keyframes successAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* FOOTER */
 
 footer {
@@ -206,5 +262,19 @@ footer a {
 
     main h2 {
         font-size: 23px;
+    }
+
+    .success-message {
+        padding: 30px 20px;
+    }
+
+    .success-message h2 {
+        font-size: 23px;
+    }
+
+    .success-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 32px;
     }
 }
