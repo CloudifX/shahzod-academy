@@ -102,7 +102,7 @@ form.addEventListener("submit", async function (event) {
         // Python serverga yuboramiz
 
         const response = await fetch(
-            "http://127.0.0.1:5000/send-application",
+    "/send-application",
             {
                 method: "POST",
 
