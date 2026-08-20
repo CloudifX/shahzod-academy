@@ -1,13 +1,21 @@
 const form = document.getElementById("academyForm");
 
 // ===============================
-// ELEMENTLARNI OLISH
+// ELEMENTLAR
 // ===============================
 
 const courseSelect = document.getElementById("course");
 const englishLevelBox = document.getElementById("englishLevelBox");
 const englishLevelSelect = document.getElementById("englishLevel");
 const successMessage = document.getElementById("successMessage");
+
+// ===============================
+// GOOGLE APPS SCRIPT URL
+// ===============================
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyWO3qX_4d4N-Q-XiUrOwT255__qEn9iZ3qYji_Mtkvmu-2qXORulnWBnivGxsaoLXG/exec";
+
 
 // ===============================
 // KURS TANLASH
@@ -30,6 +38,7 @@ courseSelect.addEventListener("change", function () {
 
 });
 
+
 // ===============================
 // FORM YUBORISH
 // ===============================
@@ -38,106 +47,78 @@ form.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
+
     // ===============================
     // MA'LUMOTLARNI OLISH
     // ===============================
 
-    const fullname = document.getElementById("fullname").value.trim();
+    const fullname =
+        document.getElementById("fullname").value.trim();
 
-    const phone = document.getElementById("phone").value.trim();
+    const phone =
+        document.getElementById("phone").value.trim();
 
-    const age = document.getElementById("age").value.trim();
+    const age =
+        document.getElementById("age").value.trim();
 
-    const course = document.getElementById("course").value;
+    const course =
+        document.getElementById("course").value;
 
-    const englishLevel = document
-        .getElementById("englishLevel")
-        .value;
+    const englishLevel =
+        document.getElementById("englishLevel").value;
 
-    const experience = document
-        .getElementById("experience")
-        .value.trim();
+    const experience =
+        document.getElementById("experience").value.trim();
 
-    const message = document
-        .getElementById("message")
-        .value.trim();
+    const message =
+        document.getElementById("message").value.trim();
 
-    const selectedTime = document.querySelector(
-        'input[name="time"]:checked'
-    );
+    const selectedTime =
+        document.querySelector('input[name="time"]:checked');
 
-    const time = selectedTime
-        ? selectedTime.value
-        : "";
+    const time =
+        selectedTime ? selectedTime.value : "";
 
 
     // ===============================
-    // BO'SH MAYDONLARNI TEKSHIRISH
+    // TEKSHIRISH
     // ===============================
 
     if (!fullname) {
-
         alert("Iltimos, ism va familiyangizni kiriting.");
-
         document.getElementById("fullname").focus();
-
         return;
     }
-
 
     if (!phone) {
-
         alert("Iltimos, telefon raqamingizni kiriting.");
-
         document.getElementById("phone").focus();
-
         return;
     }
-
 
     if (!age) {
-
         alert("Iltimos, yoshingizni kiriting.");
-
         document.getElementById("age").focus();
-
         return;
     }
-
 
     if (!course) {
-
         alert("Iltimos, kursni tanlang.");
-
         document.getElementById("course").focus();
-
         return;
     }
-
-
-    // ===============================
-    // INGLIZ TILI LEVEL TEKSHIRISH
-    // ===============================
 
     if (course === "Ingliz tili" && !englishLevel) {
 
         englishLevelBox.style.display = "block";
-
         englishLevelSelect.required = true;
 
-        alert(
-            "Iltimos, ingliz tili darajangizni tanlang."
-        );
+        alert("Iltimos, ingliz tili darajangizni tanlang.");
 
         englishLevelSelect.focus();
 
         return;
     }
-
-
-    // ===============================
-    // VAQTNI TEKSHIRISH
-    // ===============================
 
     if (!time) {
 
@@ -150,71 +131,57 @@ form.addEventListener("submit", async function (event) {
 
 
     // ===============================
-    // MA'LUMOTLARNI OBYEKTGA YIG'ISH
+    // MA'LUMOTLAR
     // ===============================
 
     const applicationData = {
 
         fullname: fullname,
-
         phone: phone,
-
         age: age,
-
         course: course,
-
         englishLevel: englishLevel,
-
         experience: experience,
-
         time: time,
-
         message: message
 
     };
 
 
     // ===============================
-    // SERVERGA YUBORISH
+    // TUGMA
     // ===============================
 
-    console.log("Serverga yuborilmoqda...");
-    console.log(applicationData);
-
-
-    // Tugmani vaqtincha o'chirish
-
-    const submitButton = form.querySelector(
-        'button[type="submit"]'
-    );
-
+    const submitButton =
+        form.querySelector('button[type="submit"]');
 
     if (submitButton) {
 
         submitButton.disabled = true;
-
         submitButton.textContent = "Yuborilmoqda...";
 
     }
 
 
+    // ===============================
+    // GOOGLE SHEETS + TELEGRAM
+    // ===============================
+
     try {
 
         const response = await fetch(
-            "/send-application",
+            GOOGLE_SCRIPT_URL,
             {
                 method: "POST",
 
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "text/plain;charset=utf-8"
                 },
 
                 body: JSON.stringify(applicationData)
             }
         );
 
-
-        // Server javobini olish
 
         const result = await response.json();
 
@@ -223,47 +190,30 @@ form.addEventListener("submit", async function (event) {
         // MUVAFFAQIYATLI
         // ===============================
 
-        if (response.ok && result.success) {
+        if (result.success) {
+
+            // Formani yashirish
+            form.style.display = "none";
+
+
+            // Success oynasini chiqarish
+            successMessage.style.display = "block";
+
 
             // Formani tozalash
-
             form.reset();
 
 
             // English levelni yashirish
-
             englishLevelBox.style.display = "none";
-
             englishLevelSelect.required = false;
-
-
-            // FORMNI YASHIRISH
-
-            form.style.display = "none";
-
-
-            // SUCCESS MESSAGE'NI CHIQARISH
-
-            successMessage.style.display = "block";
-
-
-            // Muvaffaqiyatli yuborilgandan keyin
-            // sahifani success blokigacha olib kelish
-
-            successMessage.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
 
         } else {
 
             alert(
-                "❌ Xatolik yuz berdi.\n\n" +
-                (
-                    result.message ||
-                    "Iltimos, qaytadan urinib ko'ring."
-                )
+                "❌ Arizani yuborishda xatolik yuz berdi.\n\n" +
+                (result.message ||
+                "Iltimos, qaytadan urinib ko'ring.")
             );
 
         }
@@ -271,21 +221,18 @@ form.addEventListener("submit", async function (event) {
 
     } catch (error) {
 
-        console.error("Server xatosi:", error);
+        console.error("Xatolik:", error);
 
         alert(
             "❌ Server bilan bog'lanib bo'lmadi.\n\n" +
-            "Internet yoki server ishlayotganini tekshiring."
+            "Iltimos, birozdan keyin qayta urinib ko'ring."
         );
 
     } finally {
 
-        // Tugmani qayta yoqish
-
         if (submitButton) {
 
             submitButton.disabled = false;
-
             submitButton.textContent = "Ariza yuborish";
 
         }
