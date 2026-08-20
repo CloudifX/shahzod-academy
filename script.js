@@ -1,16 +1,16 @@
 const form = document.getElementById("academyForm");
 
+// ===============================
+// ELEMENTLARNI OLISH
+// ===============================
+
+const courseSelect = document.getElementById("course");
+const englishLevelBox = document.getElementById("englishLevelBox");
+const englishLevelSelect = document.getElementById("englishLevel");
 
 // ===============================
 // KURS TANLASH
 // ===============================
-
-const courseSelect = document.getElementById("course");
-
-const englishLevelBox = document.getElementById("englishLevelBox");
-
-const englishLevelSelect = document.getElementById("englishLevel");
-
 
 courseSelect.addEventListener("change", function () {
 
@@ -29,7 +29,6 @@ courseSelect.addEventListener("change", function () {
 
 });
 
-
 // ===============================
 // FORM YUBORISH
 // ===============================
@@ -38,39 +37,98 @@ form.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
+    // ===============================
+    // MA'LUMOTLARNI OLISH
+    // ===============================
 
-    const fullname =
-        document.getElementById("fullname").value;
+    const fullname = document.getElementById("fullname").value.trim();
 
-    const phone =
-        document.getElementById("phone").value;
+    const phone = document.getElementById("phone").value.trim();
 
-    const age =
-        document.getElementById("age").value;
+    const age = document.getElementById("age").value.trim();
 
-    const course =
-        document.getElementById("course").value;
+    const course = document.getElementById("course").value;
 
-    const englishLevel =
-        document.getElementById("englishLevel").value;
+    const englishLevel = document
+        .getElementById("englishLevel")
+        .value;
 
-    const experience =
-        document.getElementById("experience").value;
+    const experience = document
+        .getElementById("experience")
+        .value.trim();
 
-    const message =
-        document.getElementById("message").value;
+    const message = document
+        .getElementById("message")
+        .value.trim();
 
+    const selectedTime = document.querySelector(
+        'input[name="time"]:checked'
+    );
 
-    const selectedTime =
-        document.querySelector(
-            'input[name="time"]:checked'
-        );
-
-    const time =
-        selectedTime ? selectedTime.value : "";
+    const time = selectedTime
+        ? selectedTime.value
+        : "";
 
 
-    // Barcha ma'lumotlarni bitta obyektga yig'amiz
+    // ===============================
+    // BO'SH MAYDONLARNI TEKSHIRISH
+    // ===============================
+
+    if (!fullname) {
+        alert("Iltimos, ism va familiyangizni kiriting.");
+        document.getElementById("fullname").focus();
+        return;
+    }
+
+    if (!phone) {
+        alert("Iltimos, telefon raqamingizni kiriting.");
+        document.getElementById("phone").focus();
+        return;
+    }
+
+    if (!age) {
+        alert("Iltimos, yoshingizni kiriting.");
+        document.getElementById("age").focus();
+        return;
+    }
+
+    if (!course) {
+        alert("Iltimos, kursni tanlang.");
+        document.getElementById("course").focus();
+        return;
+    }
+
+    // ===============================
+    // INGLIZ TILI LEVEL TEKSHIRISH
+    // ===============================
+
+    if (course === "Ingliz tili" && !englishLevel) {
+
+        englishLevelBox.style.display = "block";
+        englishLevelSelect.required = true;
+
+        alert("Iltimos, ingliz tili darajangizni tanlang.");
+
+        englishLevelSelect.focus();
+
+        return;
+    }
+
+    // ===============================
+    // VAQTNI TEKSHIRISH
+    // ===============================
+
+    if (!time) {
+
+        alert("Iltimos, o'qish uchun qulay vaqtingizni tanlang.");
+
+        return;
+    }
+
+
+    // ===============================
+    // MA'LUMOTLARNI OBYEKTGA YIG'ISH
+    // ===============================
 
     const applicationData = {
 
@@ -93,16 +151,31 @@ form.addEventListener("submit", async function (event) {
     };
 
 
+    // ===============================
+    // SERVERGA YUBORISH
+    // ===============================
+
     console.log("Serverga yuborilmoqda...");
     console.log(applicationData);
 
 
+    // Tugmani vaqtincha o'chirish
+    const submitButton = form.querySelector(
+        'button[type="submit"]'
+    );
+
+    if (submitButton) {
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Yuborilmoqda...";
+
+    }
+
+
     try {
 
-        // Python serverga yuboramiz
-
         const response = await fetch(
-    "/send-application",
+            "/send-application",
             {
                 method: "POST",
 
@@ -115,26 +188,38 @@ form.addEventListener("submit", async function (event) {
         );
 
 
+        // Server javobini olish
         const result = await response.json();
 
 
-        if (result.success) {
+        // ===============================
+        // MUVAFFAQIYATLI
+        // ===============================
+
+        if (response.ok && result.success) {
 
             alert(
-                "Arizangiz qabul qilindi!\n\n" +
+                "✅ Arizangiz qabul qilindi!\n\n" +
                 "Tez orada administratorimiz siz bilan bog'lanadi."
             );
 
+
+            // Formani tozalash
             form.reset();
 
+
+            // English levelni yashirish
             englishLevelBox.style.display = "none";
 
             englishLevelSelect.required = false;
 
+
         } else {
 
             alert(
-                "Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
+                "❌ Xatolik yuz berdi.\n\n" +
+                (result.message ||
+                "Iltimos, qaytadan urinib ko'ring.")
             );
 
         }
@@ -145,8 +230,19 @@ form.addEventListener("submit", async function (event) {
         console.error("Server xatosi:", error);
 
         alert(
-            "Server bilan bog'lanib bo'lmadi."
+            "❌ Server bilan bog'lanib bo'lmadi.\n\n" +
+            "Internet yoki server ishlayotganini tekshiring."
         );
+
+    } finally {
+
+        // Tugmani qayta yoqish
+        if (submitButton) {
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Ariza yuborish";
+
+        }
 
     }
 
